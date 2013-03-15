@@ -1,5 +1,6 @@
+#!/usr/bin/python
 import web
-render = web.template.render('templates/')
+render = web.template.render('templates/', base='layout')
 
 urls = (
     '/', 'index',
