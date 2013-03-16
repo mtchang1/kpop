@@ -1,0 +1,45 @@
+#members {
+    display: table;
+    width: 900px;
+    height: 450px;
+    margin: 0 auto;
+}
+
+#members a {
+    background-size: 150px 450px;
+}
+
+#members a:hover {
+    background-image:url('../images/matoki.jpg');
+}
+
+#byg {
+    background-image:url('../images/home-byg.jpg');
+    display: table-cell;
+}
+
+#hc {
+    background-image:url('../images/home-hc.jpg');
+    display: table-cell;
+}
+
+#dh {
+    background-image:url('../images/home-dh.jpg');
+    display: table-cell;
+}
+
+#yj {
+    background-image:url('../images/home-yj.jpg');
+    display: table-cell;
+}
+
+#ju {
+    background-image:url('../images/home-ju.jpg');
+    display: table-cell;
+}
+
+#zelo {
+    background-image:url('../images/home-zelo.jpg');
+    display: table-cell;
+}
+
