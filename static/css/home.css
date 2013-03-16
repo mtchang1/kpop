@@ -5,41 +5,55 @@
     margin: 0 auto;
 }
 
-#members a {
-    background-size: 150px 450px;
+#members span {
+    display: table-cell;
+    width: 150px;
+    background-size: 100% 100%; 
+    font-size: 0px;
 }
 
-#members a:hover {
-    background-image:url('../images/matoki.jpg');
+#byg:hover {
+    font-size:36px;
+}
+
+/*
+#members span div {
+    font-size: 0pt;
+}
+
+#members span div:hover { 
+    display: inline-block;
+    font-size: 36pt;
+}
+*/
+
+
+#members span:hover {
+    background-image:url('../images/matoki.jpg'); 
 }
 
 #byg {
     background-image:url('../images/home-byg.jpg');
-    display: table-cell;
 }
+
 
 #hc {
     background-image:url('../images/home-hc.jpg');
-    display: table-cell;
 }
 
 #dh {
     background-image:url('../images/home-dh.jpg');
-    display: table-cell;
 }
 
 #yj {
     background-image:url('../images/home-yj.jpg');
-    display: table-cell;
 }
 
 #ju {
     background-image:url('../images/home-ju.jpg');
-    display: table-cell;
 }
 
 #zelo {
     background-image:url('../images/home-zelo.jpg');
-    display: table-cell;
 }
 
