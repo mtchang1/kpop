@@ -12,22 +12,6 @@
     font-size: 0px;
 }
 
-#byg:hover {
-    font-size:36px;
-}
-
-/*
-#members span div {
-    font-size: 0pt;
-}
-
-#members span div:hover { 
-    display: inline-block;
-    font-size: 36pt;
-}
-*/
-
-
 #members span:hover {
     background-image:url('../images/matoki.jpg'); 
 }
@@ -36,24 +20,75 @@
     background-image:url('../images/home-byg.jpg');
 }
 
+#byg:hover {
+    font-size:30px;
+    color: red;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    vertical-align: middle;
+    text-align: center;
+}
 
 #hc {
     background-image:url('../images/home-hc.jpg');
+}
+
+#hc:hover {
+    font-size:30px;
+    color: #FF1493;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    vertical-align: middle;
+    text-align: center;
 }
 
 #dh {
     background-image:url('../images/home-dh.jpg');
 }
 
+#dh:hover {
+    font-size:30px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    vertical-align: middle;
+    text-align: center;
+}
+
 #yj {
     background-image:url('../images/home-yj.jpg');
+}
+
+#yj:hover {
+    font-size:30px;
+    color: yellow;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    vertical-align: middle;
+    text-align: center;
 }
 
 #ju {
     background-image:url('../images/home-ju.jpg');
 }
 
+#ju:hover {
+    font-size:30px;
+    color: green;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    vertical-align: middle;
+    text-align: center;
+}
+
 #zelo {
     background-image:url('../images/home-zelo.jpg');
 }
 
+#zelo:hover {
+    font-size:30px;
+    color: #00B2EE;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#logo {
+    display: block;
+    margin: 0 auto;
+}
