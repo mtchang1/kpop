@@ -9,10 +9,13 @@ Currently implementing three pages:
     News page -- Latest news scraped from other websites
     About page -- About the website
 
-Info on web.py:
+Frameworks/Libraries used:
 
-    http://webpy.org/ 
-    Created by Aaron Swartz (RIP)
+    Webpy:
+        http://webpy.org/ 
+        Created by Aaron Swartz (RIP)
+    Beautiful Soup:
+        http://www.crummy.com/software/BeautifulSoup/
 
 Developers:
 
