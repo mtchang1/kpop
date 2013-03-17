@@ -1,18 +1,29 @@
 $def with (content)
+
+$def is_active(name):
+    $if content.name == name:
+        id = "active"\
+\
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>$content.title</title>
     <script type="text/javascript" src="static/js/jquery-1.9.1.js"></script>
     <link href="static/css/bap.css" rel="stylesheet" media="screen" />
-
     $if content.cssfiles:
         $for f in content.cssfiles.split():
             <link rel="stylesheet" href="static/css/$f" type="text/css" media="screen" charset="utf-8"/>
 
 </head>
 <body>
-<!--TODO: add navbar-->
+    <ul id="navlist">
+        <li $:is_active("home")><a href="/">home</a></li>
+        |
+        <li $:is_active("news")><a href="news">news</a></li>
+        |
+        <li $:is_active("about")><a href="about">about</a></li>
+    </ul>
+
     $:content
 </body>
 </html>

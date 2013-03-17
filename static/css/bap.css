@@ -8,6 +8,7 @@ body {
 }
 #navlist li {
     display: inline-block;
+    padding: 1px;
 }
 
 #navlist a {
@@ -15,17 +16,18 @@ body {
     text-decoration:none;
     font-weight: bold;
     font-size: 150%;
-    border-style: none;
 }
 
 #navlist li#active {
     border-color: green;
     border-width: 1px;
     border-style: dotted;
+    padding: 0px;
 }
 
 #navlist li:hover {
     border-color: white;
     border-width: 1px;
     border-style: dotted;
+    padding: 0px;
 }
