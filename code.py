@@ -14,7 +14,9 @@ class index:
 
 class news:
     def GET(self):
-        return render.news()
+        db = web.database(dbn='sqlite', db='news.db')
+        articles = db.select('links')
+        return render.news(articles)
 
 class about:
     def GET(self):
