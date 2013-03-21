@@ -9,7 +9,6 @@
     display: block;
     position: relative;
     left: 40px;
-    margin: 0 auto;
 }
 
 .album img {
@@ -36,12 +35,16 @@
 
 .album div#videos {
     display: table-column-group;
-    position: relative;
-    right: 100px;
-    float: right;
+    float: left;
 }
 
 .album iframe {
     display: block;
+}
+
+.space {
+    display: block;
+    height: 50px;
+    clear: both;
 }
 
