@@ -31,3 +31,10 @@ body {
     border-style: dotted;
     padding: 0px;
 }
+
+.title {
+    display: block;
+    position: relative;
+    left: 40px;
+    color: #D1D1D1
+}
