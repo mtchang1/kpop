@@ -35,7 +35,7 @@
 }
 
 .album iframe {
-    display: inline;
+    display: table-column-group;
     position: relative;
     right: 100px;
     float: right;
