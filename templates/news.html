@@ -1,12 +1,15 @@
 $def with(articles)
 
 $var name: news
-$var title: BAP news
-$var cssfiles: 
+$var title: News
+$var cssfiles: news.css
 
-<h1>BAP News</h1>
+<h1 class="title">B.A.P News</h1>
 
-<ul>
 $for a in articles:
-    <li><a href="$a.url" title="$a.time">$a.title</li>
-</ul>
+    <div class="article">
+        <img src="$a.img">
+        <a href="$a.url" title="$a.time">$a.title</a>
+        <p>$a.abstract</p>
+        <div class="space"></div>
+    </div>
