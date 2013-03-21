@@ -1,21 +1,43 @@
-div {
-    display: table;
+#title {
+    display: block;
+    position: relative;
+    left: 40px;
+    color: #D1D1D1
 }
 
-div.img {
-    display: table-cell;
+.album {
+    display: block;
+    position: relative;
+    left: 40px;
+    margin: 0 auto;
 }
 
-div.h2 {
+.album img {
+    float: left;
+    height: 200px
 }
 
-div.h3 {
-    display: table-cell;
+.album h2 {
+    display: table-header-group;
+    color: silver;
 }
 
-div.p {
-    display: table-cell;
+.album h3 {
+    display: table-header-group;
+    color: silver;
 }
 
-div.iframe{
+.album ol {
+    float: left;
+    width: 200px;
+    font-size: 20px;
+    color: #00FF7F;
 }
+
+.album iframe {
+    display: inline;
+    position: relative;
+    right: 100px;
+    float: right;
+}
+
