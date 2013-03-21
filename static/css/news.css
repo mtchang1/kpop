@@ -1,0 +1,29 @@
+.article {
+    display: block;
+    position: relative;
+    left: 40px;
+    border-style: dashed;
+    border-width: 5px;
+    border-color: black;
+}
+
+.article img {
+    float: left;
+    width: 200px;
+}
+
+.article a {
+    color: green;
+    font-size: 20px;
+    position: relative;
+    left: 20px;
+}
+
+.article p {  
+    position: relative;
+    left: 20px;
+}
+
+.space {
+    clear: both;
+}
