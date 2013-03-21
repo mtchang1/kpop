@@ -3,6 +3,10 @@ body {
     color: white;
 }
 
+a {
+    color: green;
+}
+
 #navlist ul {
     list-style-type: none;
 }
