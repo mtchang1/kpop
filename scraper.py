@@ -1,8 +1,16 @@
 #!/usr/bin/python
+
+"""
+Note: The article's timestamp on the site is assumed to be of the same
+      timezone (if not specified by the site).
+"""
+
+
 import urllib2
 import string
 from bs4 import BeautifulSoup
 import sqlite3
+import time as timelib
 
 user_agent = 'Mozilla/5'
 headers = { 'User-Agent' : user_agent }
@@ -20,16 +28,19 @@ news = []
 for result in results:
     try:
         time = result.find('span', class_="timestamp").contents[2].strip()
+        t=timelib.strptime(time,"%b %d, %Y at %I:%M %p")
+        epochtime = timelib.mktime(t)
     except AttributeError:
         break
     temp = result.find('h2').find('a')
+    #is unicode() necessary?
     title = unicode(temp.string).strip()
     url = temp['href']
     #image
     img = result.find('div',class_='row-col-left').find('img')['src']
     #abstract
     text = unicode(result.find('p').string).strip()
-    news.append(('allkpop.com', time, url, img, text, title))
+    news.append(('allkpop.com', time, epochtime,  url, img, text, title))
 
 #kpopstarz.com
 user_agent = 'Mozilla/5'
@@ -44,13 +55,15 @@ news2 = []
 
 for result in results:
     time = unicode(result.find('span', class_="date").string)
+    t = timelib.strptime(time,"%B %d, %Y | %H:%M %p %Z")
+    epochtime = timelib.mktime(t)
     temp = result.find('h3').find('a')
     title = unicode(temp.string)
     url = "http://www.kpopstarz.com" + temp['href']
     blurb = unicode(result.find('p').string)
     img = result.find('a').find('img')['src']
     #print url
-    news2.append(('kpopstarz.com',time, url, img, blurb, title)) 
+    news2.append(('kpopstarz.com',time, epochtime, url, img, blurb, title)) 
 
 allnews = news+news2
 
@@ -60,8 +73,8 @@ c = conn.cursor()
 create_table1 = \
     """
     CREATE TABLE IF NOT EXISTS articles
-        (title TEXT PRIMARY KEY, url TEXT UNIQUE, time TEXT, dbtime TEXT,
-         site TEXT, img TEXT, abstract TEXT);
+        (title TEXT PRIMARY KEY, url TEXT UNIQUE, time TEXT, epochtime REAL, 
+         dbtime TEXT, site TEXT, img TEXT, abstract TEXT);
     """
 create_table2 = \
     """
@@ -91,12 +104,12 @@ c.execute(update_trigger)
 for article in allnews:
     #try:
     c.execute("UPDATE OR FAIL articles SET "
-              "site=?, time=?, url=?, img=?, abstract=? "
+              "site=?, time=?, epochtime=?, url=?, img=?, abstract=? "
               "WHERE title=?", article)
     if c.rowcount == 0:
         c.execute("INSERT OR REPLACE INTO articles "
-              "(site, time, url, img, abstract, title) "
-              "VALUES (?,?,?,?,?,?)", article)
+              "(site, time, epochtime, url, img, abstract, title) "
+              "VALUES (?,?,?,?,?,?,?)", article)
 
 sites = ['allkpop.com','kpopstarz.com']
 for site in sites:
