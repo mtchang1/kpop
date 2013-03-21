@@ -29,7 +29,7 @@ for result in results:
     img = result.find('div',class_='row-col-left').find('img')['src']
     #abstract
     text = unicode(result.find('p').string).strip()
-    news.append(('allkpop.com', time, url, title, img, text))
+    news.append(('allkpop.com', time, url, img, text, title))
 
 #kpopstarz.com
 user_agent = 'Mozilla/5'
@@ -49,9 +49,10 @@ for result in results:
     url = "http://www.kpopstarz.com" + temp['href']
     blurb = unicode(result.find('p').string)
     img = result.find('a').find('img')['src']
-    print url
-    news2.append((time, url, title, blurb, img)) 
+    #print url
+    news2.append(('kpopstarz.com',time, url, img, blurb, title)) 
 
+allnews = news+news2
 
 #store in database
 conn = sqlite3.connect('news.db')
@@ -66,7 +67,7 @@ create_table2 = \
     """
     CREATE TABLE IF NOT EXISTS sites (domain TEXT PRIMARY KEY);
     """
-create_trigger = \
+insert_trigger = \
     """
     CREATE TRIGGER IF NOT EXISTS new_article AFTER INSERT ON articles
     begin
@@ -74,19 +75,30 @@ create_trigger = \
         WHERE rowid = new.rowid;
     end;
     """
+update_trigger = \
+    """
+    CREATE TRIGGER IF NOT EXISTS update_article AFTER UPDATE OF url ON articles
+    begin
+        UPDATE articles SET dbtime = datetime('now','localtime')
+        WHERE rowid = new.rowid;
+    end;
+    """
 c.execute(create_table1)
 c.execute(create_table2)
-c.execute(create_trigger)
-    
-for article in news:
-    try:
-        c.execute("INSERT INTO articles (site, time, url, title, img, abstract) "
-                  "VALUES (?,?,?,?,?,?)", article)
-    except sqlite3.IntegrityError as detail:
-        #print detail
-        print "Already added: %s" % article[2]
+c.execute(insert_trigger)
+c.execute(update_trigger)
+ 
+for article in allnews:
+    #try:
+    c.execute("UPDATE OR FAIL articles SET "
+              "site=?, time=?, url=?, img=?, abstract=? "
+              "WHERE title=?", article)
+    if c.rowcount == 0:
+        c.execute("INSERT OR REPLACE INTO articles "
+              "(site, time, url, img, abstract, title) "
+              "VALUES (?,?,?,?,?,?)", article)
 
-sites = ['allkpop.com']
+sites = ['allkpop.com','kpopstarz.com']
 for site in sites:
     c.execute("INSERT OR IGNORE INTO sites (domain) VALUES (?)", (site,))
 
