@@ -2,7 +2,7 @@
 
 """
 Note: The article's timestamp on the site is assumed to be of the same
-      timezone (if not specified by the site).
+      timezone as the server (if not specified by the site).
 """
 
 
