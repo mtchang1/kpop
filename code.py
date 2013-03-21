@@ -5,7 +5,8 @@ render = web.template.render('templates/', base='layout')
 urls = (
     '/', 'index',
     '/news', 'news',
-    '/about', 'about',
+    '/discography','discography',
+    '/about', 'about'
 )
 
 class index:
@@ -17,6 +18,10 @@ class news:
         db = web.database(dbn='sqlite', db='news.db')
         articles = db.select('links')
         return render.news(articles)
+
+class discography:
+    def GET(self):
+        return render.discography()
 
 class about:
     def GET(self):

@@ -1,0 +1,21 @@
+div {
+    display: table;
+}
+
+div.img {
+    display: table-cell;
+}
+
+div.h2 {
+}
+
+div.h3 {
+    display: table-cell;
+}
+
+div.p {
+    display: table-cell;
+}
+
+div.iframe{
+}
