@@ -34,10 +34,14 @@
     color: #00FF7F;
 }
 
-.album iframe {
+.album div#videos {
     display: table-column-group;
     position: relative;
     right: 100px;
     float: right;
+}
+
+.album iframe {
+    display: block;
 }
 
