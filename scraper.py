@@ -9,27 +9,47 @@ import sqlite3
 user_agent = 'Mozilla/5'
 headers = { 'User-Agent' : user_agent }
 
-#sending out GET request (I think)
+#allkpop.com
+#sending out GET request
 request = urllib2.Request("http://allkpop.com/tag/b-a-p", None, headers)
 response = urllib2.urlopen(request)
-
-#need to implement: go through all b-a-p/page/* until title of page: not found
 
 #extracting information
 soup = BeautifulSoup(response.read())
 results = soup.find_all('article')
 news = []
-#something else
+
 for result in results:
     try:
         time = result.find('span', class_="timestamp").contents[2]
     except AttributeError:
         break
-    #NEED TO: sort date by year month day time
     temp = result.find('h2').find('a')
     title = unicode(temp.string)
     url = temp['href']
     news.append((time, url, title))
+
+#kpopstarz.com
+user_agent = 'Mozilla/5'
+headers = { 'User-Agent' : user_agent }
+
+request = urllib2.Request("http://www.kpopstarz.com/archives/articles/tags/b-a-p", None, headers)
+response = urllib2.urlopen(request)
+
+soup = BeautifulSoup(response.read())
+results = soup.find_all("div", class_="summary")
+news2 = [] 
+
+for result in results:
+    time = unicode(result.find('span', class_="date").string)
+    temp = result.find('h3').find('a')
+    title = unicode(temp.string)
+    url = "http://www.kpopstarz.com" + temp['href']
+    blurb = unicode(result.find('p').string)
+    img = result.find('a').find('img')['src']
+    print url
+    news2.append((time, url, title, blurb, img)) 
+
 
 #store in database
 conn = sqlite3.connect('news.db')
