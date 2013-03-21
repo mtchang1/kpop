@@ -1,0 +1,43 @@
+#title {
+    display: block;
+    position: relative;
+    left: 40px;
+    color: #D1D1D1
+}
+
+.album {
+    display: block;
+    position: relative;
+    left: 40px;
+    margin: 0 auto;
+}
+
+.album img {
+    float: left;
+    height: 200px
+}
+
+.album h2 {
+    display: table-header-group;
+    color: silver;
+}
+
+.album h3 {
+    display: table-header-group;
+    color: silver;
+}
+
+.album ol {
+    float: left;
+    width: 200px;
+    font-size: 20px;
+    color: #00FF7F;
+}
+
+.album iframe {
+    display: inline;
+    position: relative;
+    right: 100px;
+    float: right;
+}
+
