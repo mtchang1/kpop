@@ -1,10 +1,7 @@
-#!/usr/bin/python
-
 """
 Note: The article's timestamp on the site is assumed to be of the same
       timezone as the server (if not specified by the site).
 """
-
 
 import urllib2
 import string
@@ -15,12 +12,12 @@ import time as timelib
 user_agent = 'Mozilla/5'
 headers = { 'User-Agent' : user_agent }
 
-#allkpop.com
+#scrape allkpop.com
 #sending out GET request
 request = urllib2.Request("http://allkpop.com/tag/b-a-p", None, headers)
 response = urllib2.urlopen(request)
 
-#extracting information
+#parse html
 soup = BeautifulSoup(response.read())
 results = soup.find_all('article')
 news = []
@@ -30,33 +27,43 @@ for result in results:
         time = result.find('span', class_="timestamp").contents[2].strip()
         t=timelib.strptime(time,"%b %d, %Y at %I:%M %p")
         epochtime = timelib.mktime(t)
+    except ValueError as details:
+        #fail gracefully and go on to next article
+        print "Timestamp parsing error: %s" % details
+        continue
     except AttributeError:
+        #no more articles left
         break
     temp = result.find('h2').find('a')
     #is unicode() necessary?
     title = unicode(temp.string).strip()
     url = temp['href']
-    #image
     img = result.find('div',class_='row-col-left').find('img')['src']
-    #abstract
     text = unicode(result.find('p').string).strip()
     news.append(('allkpop.com', time, epochtime,  url, img, text, title))
 
 #kpopstarz.com
-user_agent = 'Mozilla/5'
-headers = { 'User-Agent' : user_agent }
-
-request = urllib2.Request("http://www.kpopstarz.com/archives/articles/tags/b-a-p", None, headers)
+#send Get request
+request = urllib2.Request("http://www.kpopstarz.com/archives/"
+                          "articles/tags/b-a-p", None, headers)
 response = urllib2.urlopen(request)
 
+#parse html
 soup = BeautifulSoup(response.read())
 results = soup.find_all("div", class_="summary")
 news2 = [] 
 
 for result in results:
     time = unicode(result.find('span', class_="date").string)
-    t = timelib.strptime(time,"%B %d, %Y | %H:%M %p %Z")
-    epochtime = timelib.mktime(t)
+    #stripping off timezone because library doesn't support it for some reason
+    #webfaction library
+    try:
+        t = timelib.strptime(time[:-4],"%B %d, %Y | %H:%M %p")
+        epochtime = timelib.mktime(t)
+    except ValueError as details:
+        #fail gracefully and go on to next article
+        print "Timestamp parsing error: %s" % details
+        continue
     temp = result.find('h3').find('a')
     title = unicode(temp.string)
     url = "http://www.kpopstarz.com" + temp['href']
@@ -68,6 +75,8 @@ for result in results:
 allnews = news+news2
 
 #store in database
+
+#db_dir = root_dir + '/news.db'
 conn = sqlite3.connect('news.db')
 c = conn.cursor()
 create_table1 = \
@@ -102,7 +111,6 @@ c.execute(insert_trigger)
 c.execute(update_trigger)
  
 for article in allnews:
-    #try:
     c.execute("UPDATE OR FAIL articles SET "
               "site=?, time=?, epochtime=?, url=?, img=?, abstract=? "
               "WHERE title=?", article)
