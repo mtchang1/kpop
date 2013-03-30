@@ -1,7 +1,7 @@
 kpop
 ====
 
-This is a simple BAP (Korean boy band) fan site created with python using the web.py framework.
+This is a simple BAP (Korean boy band) fan site created with python using the web.py framework: http://kpop.eddyyeo.webfactional.com
 
 Frameworks/Libraries used:
 
