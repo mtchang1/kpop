@@ -5,6 +5,7 @@ $var title: News
 $var cssfiles: news.css
 
 <h1 class="title">B.A.P News</h1>
+<span id="updated_time">Last updated: $update_time</span>
 
 $for a in articles:
     <div class="article">
@@ -13,5 +14,3 @@ $for a in articles:
         <p>$a.abstract</p>
         <div class="space"></div>
     </div>
-<br />
-Last updated: $update_time

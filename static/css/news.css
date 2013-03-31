@@ -27,3 +27,9 @@
 .space {
     clear: both;
 }
+
+#updated_time {
+    position: relative;
+    left: 40px;
+    color: gray;
+}
