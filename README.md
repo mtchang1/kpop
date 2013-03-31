@@ -1,7 +1,9 @@
 kpop
 ====
 
-This is a simple BAP (Korean boy band) fan site created with python using the web.py framework: http://kpop.eddyyeo.webfactional.com
+This is a fan site for the Korean boy band B.A.P. It aggregates the latest news about the band by scraping allkpop.com and kpopstarz.com every hour. It also includes the full discography of the band.
+
+http://kpop.eddyyeo.webfactional.com
 
 Frameworks/Libraries used:
 
