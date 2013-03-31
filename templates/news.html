@@ -1,4 +1,4 @@
-$def with(articles)
+$def with(articles, update_time)
 
 $var name: news
 $var title: News
@@ -13,3 +13,5 @@ $for a in articles:
         <p>$a.abstract</p>
         <div class="space"></div>
     </div>
+<br />
+Last updated: $update_time

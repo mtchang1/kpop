@@ -27,8 +27,11 @@ class index:
 class news:
     def GET(self):
         db = web.database(dbn='sqlite', db=db_dir)
-        articles = db.select('articles', order='epochtime DESC')
-        return render.news(articles)
+        #retrieve only the twenty most recent articles
+        articles = db.select('articles', order='epochtime DESC', limit = 20)
+        update_time = db.select('articles', what='dbtime', 
+                                limit = 1, order = 'dbtime DESC')[0].dbtime
+        return render.news(articles,update_time)
 
 class discography:
     def GET(self):

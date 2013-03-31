@@ -8,6 +8,14 @@ import string
 from bs4 import BeautifulSoup
 import sqlite3
 import time as timelib
+import datetime
+import os
+
+now = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+print "Scraper starting at %s" % now
+
+#resolve absolute directory path
+root_dir = os.path.abspath(os.path.dirname(__file__))
 
 user_agent = 'Mozilla/5'
 headers = { 'User-Agent' : user_agent }
@@ -76,8 +84,9 @@ allnews = news+news2
 
 #store in database
 
-#db_dir = root_dir + '/news.db'
-conn = sqlite3.connect('news.db')
+#absolute path to sqlite db
+db_dir = root_dir + '/news.db'
+conn = sqlite3.connect(db_dir)
 c = conn.cursor()
 create_table1 = \
     """
@@ -125,3 +134,6 @@ for site in sites:
 
 conn.commit()
 conn.close()
+
+now = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+print "Scraper ending at %s" % now
